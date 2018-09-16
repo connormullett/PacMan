@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace PacManChallenge
 {
-	public class Program
+	public class Bonus
 	{
-		static void Main(string[] args)
-		{
-			Game.Start();
-		}
 	}
 }
