@@ -15,39 +15,60 @@ namespace PacManChallenge
 			Pacman pac = new Pacman();
 			Ghost ghost = new Ghost();
 			var bonusList = new Bonus();
+			var first = true;
 
-			for (int i = 0; i < GetGameInputs().Length; i++)
+			while (first)
 			{
-				if (pac.Lives == 0)
+
+				for (int i = 0; i < GetGameInputs().Length; i++)
 				{
-					Console.WriteLine("GameOver");
-					break;
-				}
+					if (pac.Lives == 0)
+					{
+						Console.WriteLine("GameOver");
+						break;
+					}
 
-				//do lives for 10,000 plus (new variable called pointsToNextLife)
-				pac.NextLife = 0;
+					if (first)
+					{
+						pac.NextLife += 5000;
+					}
 
-				var thisInput = GetGameInputs()[i];
+					first = false;
 
-				switch (thisInput)
-				{
-					case "Dot":
-						pac.Points += 10;
-						pac.NextLife += 10;
-						break;
-					case "InvincibleGhost":
-						pac.Lives--;
-						break;
-					case "VulnerableGhost":
-						pac.Points += ghost.BonusFactor;
-						pac.NextLife += ghost.BonusFactor;
-						ghost.BonusFactor *= 2;
-						break;
-					default:
-						var bonus = bonusList._bonuses[thisInput];
-						pac.Points += bonus;
-						pac.NextLife += bonus;
-						break;
+					var thisInput = GetGameInputs()[i];
+
+					switch (thisInput)
+					{
+						case "Dot":
+							pac.Points += 10;
+							pac.NextLife += 10;
+							Console.WriteLine("waka");
+							break;
+						case "InvincibleGhost":
+							pac.Lives--;
+							Console.WriteLine("wah-wah");
+							break;
+						case "VulnerableGhost":
+							pac.Points += ghost.BonusFactor;
+							pac.NextLife += ghost.BonusFactor;
+							ghost.BonusFactor *= 2;
+							Console.WriteLine("wing-wing");
+							break;
+						default:
+							var bonus = bonusList._bonuses[thisInput];
+							pac.Points += bonus;
+							pac.NextLife += bonus;
+							Console.WriteLine("wuing wuing wuing");
+							break;
+					}
+
+					if (pac.NextLife >= 10000)
+					{
+						pac.Lives++;
+						pac.LivesGained++;
+						pac.NextLife = 0;
+						Console.WriteLine("new life");
+					}
 				}
 			}
 
