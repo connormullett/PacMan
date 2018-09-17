@@ -13,7 +13,7 @@ namespace PacManChallenge
 		{
 			Pacman pac = new Pacman();
 			Ghost ghost = new Ghost();
-			var first = true;
+			var first = true;		
 
 			while (first)
 			{
