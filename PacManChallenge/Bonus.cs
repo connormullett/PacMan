@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PacManChallenge
 {
-	public static class Bonus
+	public class Bonus
 	{
-		public static readonly Dictionary<string, int> _bonuses = new Dictionary<string, int>
+		public Dictionary<string, int> _bonuses = new Dictionary<string, int>
 		{
 			{ "Cherry", 100 },
 			{ "Strawberry", 300 },
