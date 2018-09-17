@@ -9,12 +9,10 @@ namespace PacManChallenge
 {
 	public static class Game
 	{
-
 		public static void Start()
 		{
 			Pacman pac = new Pacman();
 			Ghost ghost = new Ghost();
-			var bonusList = new Bonus();
 			var first = true;
 
 			while (first)
@@ -22,16 +20,7 @@ namespace PacManChallenge
 
 				for (int i = 0; i < GetGameInputs().Length; i++)
 				{
-					if (pac.Lives == 0)
-					{
-						Console.WriteLine("GameOver");
-						break;
-					}
-
-					if (first)
-					{
-						pac.NextLife += 5000;
-					}
+					if (first) pac.NextLife += 5000;
 
 					first = false;
 
@@ -42,23 +31,19 @@ namespace PacManChallenge
 						case "Dot":
 							pac.Points += 10;
 							pac.NextLife += 10;
-							Console.WriteLine("waka");
 							break;
 						case "InvincibleGhost":
 							pac.Lives--;
-							Console.WriteLine("wah-wah");
 							break;
 						case "VulnerableGhost":
 							pac.Points += ghost.BonusFactor;
 							pac.NextLife += ghost.BonusFactor;
 							ghost.BonusFactor *= 2;
-							Console.WriteLine("wing-wing");
 							break;
 						default:
-							var bonus = bonusList._bonuses[thisInput];
+							var bonus = Bonus._bonuses[thisInput];
 							pac.Points += bonus;
 							pac.NextLife += bonus;
-							Console.WriteLine("wuing wuing wuing");
 							break;
 					}
 
@@ -67,7 +52,6 @@ namespace PacManChallenge
 						pac.Lives++;
 						pac.LivesGained++;
 						pac.NextLife = 0;
-						Console.WriteLine("new life");
 					}
 				}
 			}
