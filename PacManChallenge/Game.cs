@@ -7,9 +7,23 @@ using System.Threading.Tasks;
 
 namespace PacManChallenge
 {
-	public static class Game
+	public class Game : IConsole, IGame
 	{
-		public static void Start()
+		private readonly IConsole _console;
+		private readonly IGame _game;
+
+		public Game(IConsole console)
+		{
+			_console = console;
+		}
+
+		public Game(IConsole console, IGame game)
+		{
+			_console = console;
+			_game = game;
+		}
+
+		public void Start()
 		{
 			Pacman pac = new Pacman();
 			Ghost ghost = new Ghost();
@@ -56,17 +70,27 @@ namespace PacManChallenge
 				}
 			}
 
-			Console.WriteLine($"Points: {pac.Points}");
-			Console.WriteLine($"Lives: {pac.Lives}");
-			Console.WriteLine($"Lives Gained: {pac.LivesGained}");
-			Console.ReadKey();
+			_console.WriteLine($"Points: {pac.Points}");
+			_console.WriteLine($"Lives: {pac.Lives}");
+			_console.WriteLine($"Lives Gained: {pac.LivesGained}");
+			_console.ReadLine();
 		}
 
-		public static string[] GetGameInputs()
+		public string[] GetGameInputs()
 		{
-			string text = File.ReadAllText(@"../../GameInput.Txt");
-			var list = text.Split(',');
-			return list;
+			return File.ReadAllText(@"../../GameInput.Txt").Split(',');
 		}
+
+		public void WriteLine(string s)
+		{
+			Console.WriteLine(s);
+		}
+
+		public string ReadLine()
+		{
+			return Console.ReadLine();
+		}
+
+		//TODO: Unit test this shit
 	}
 }

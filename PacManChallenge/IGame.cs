@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace PacManChallenge
 {
-	public class Program
+	public interface IGame
 	{
-		static void Main(string[] args)
-		{
-			var game = new Game(new RealConsole());
-			game.Start();
-		}
+		void Start();
+		string[] GetGameInputs();
 	}
 }
